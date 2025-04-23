@@ -110,6 +110,72 @@
             padding: 2rem 0;
         }
 
+        .experience-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .experience-button {
+            background: none;
+            border: 1px solid #64ffda;
+            color: #64ffda;
+            padding: 0.4rem 1rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .menu-label {
+            margin-right: 0.4rem;
+        }
+
+        .experience-button.open {
+            background-color: rgba(100, 255, 218, 0.1);
+            color: white;
+        }
+
+        .experience-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: #112240;
+            border: 1px solid #233554;
+            border-radius: 5px;
+            margin-top: 5px;
+            min-width: 200px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .experience-dropdown a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #8892b0;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .experience-dropdown a:hover {
+            background-color: #0a192f;
+            color: #64ffda;
+        }
+
+        #experienceArrow {
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-button.open #experienceArrow {
+            transform: rotate(180deg);
+        }
+
+        .experience-menu.open .experience-dropdown {
+            display: block;
+        }
+
         @media (min-width: 992px) {
             .tech-stack {
                 height: 100%;
@@ -186,6 +252,16 @@
             .custom-height {
                 height: 100% !important;
             }
+
+            @media (max-width: 576px) {
+                .menu-label {
+                    display: none;
+                }
+
+                #experienceArrow {
+                    margin: 0 auto;
+                }
+            }
         }
     </style>
     <meta name="google-site-verification" content="f5mn1yleYuTREapzr0tfmchZzwbcYT9cS63rG_4KSx4" />
@@ -196,6 +272,15 @@
         <div class="row g-0 w-100 custom-height">
             <div class="col-lg-6 hero-section pe-lg-5">
                 <div class="h-100 d-flex flex-column justify-content-center">
+                    <div class="experience-menu" id="experienceMenu">
+                        <button class="experience-button" id="experienceToggle">
+                            <span class="menu-label">Experience</span>
+                            <span id="experienceArrow">&bigtriangledown;</span>
+                        </button>
+                        <div class="experience-dropdown" id="experienceDropdown">
+                            <a href="/roblox.html">Roblox Resume</a>
+                        </div>
+                    </div>
                     <p class="text-highlight mb-3">Hi, my name is</p>
                     <h1 class="display-4 text-white mb-4">Anastasis Gkletos</h1>
                     <h2 class="h3 text-white-50 mb-4">I build things for the web.</h2>
@@ -312,9 +397,29 @@
             </div>
         </div>
     </main>
+
     <footer class="text-center pb-3 text-highlight">
         &copy; 2025 Anastasios Gkletos. All rights reserved.
     </footer>
+
+    <script>
+        const menu = document.getElementById("experienceMenu");
+        const toggle = document.getElementById("experienceToggle");
+        const dropdown = document.getElementById("experienceDropdown");
+
+        toggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            menu.classList.toggle("open");
+            toggle.classList.toggle("open");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!menu.contains(e.target)) {
+                menu.classList.remove("open");
+                toggle.classList.remove("open");
+            }
+        });
+    </script>
 </body>
 
 </html>
